@@ -1,8 +1,8 @@
 package com.luis.financial_backend.modules.auth.dto;
 
-import com.luis.financial_backend.modules.auth.entity.Role;
 
-import java.util.Set;
+import java.util.List;
+
 
 public record AuthResponse(
 
@@ -10,5 +10,5 @@ public record AuthResponse(
         String refreshToken,
         String email,
         String username,
-        Set<Role> roles
+        List<RoleResponse> roles
 ){}
