@@ -1,10 +1,7 @@
 package com.luis.financial_backend.modules.auth.controller;
 
 
-import com.luis.financial_backend.modules.auth.dto.AuthResponse;
-import com.luis.financial_backend.modules.auth.dto.LoginRequest;
-import com.luis.financial_backend.modules.auth.dto.RefreshTokenRequest;
-import com.luis.financial_backend.modules.auth.dto.RegisterRequest;
+import com.luis.financial_backend.modules.auth.dto.*;
 import com.luis.financial_backend.modules.auth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -50,20 +47,11 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout (
-            @RequestBody @Valid RefreshTokenRequest request
-    ){
-
-        authService.logout(request);
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping("/me")
-    public ResponseEntity<AuthResponse> me (
-            @AuthenticationPrincipal(expression = "username") String username
+    public ResponseEntity<AuthResponseMe> me (
+            @AuthenticationPrincipal(expression = "username") String email
     ){
-        AuthResponse response = authService.me(username);
+        AuthResponseMe response = authService.me(email);
         return ResponseEntity.ok(response);
     }
 }

@@ -1,10 +1,7 @@
 package com.luis.financial_backend.modules.auth.mapper;
 
 
-import com.luis.financial_backend.modules.auth.dto.AuthResponse;
-import com.luis.financial_backend.modules.auth.dto.PermissionResponse;
-import com.luis.financial_backend.modules.auth.dto.RegisterRequest;
-import com.luis.financial_backend.modules.auth.dto.RoleResponse;
+import com.luis.financial_backend.modules.auth.dto.*;
 import com.luis.financial_backend.modules.auth.entity.Permission;
 import com.luis.financial_backend.modules.auth.entity.Role;
 import com.luis.financial_backend.modules.auth.entity.User;
@@ -26,11 +23,22 @@ public class AuthMapper{
     }
 
     public AuthResponse toAuthResponse(
-            User user, String accessToken, String refreshToken
+            User user,
+            String accessToken,
+            String refreshToken
     ){
         return new AuthResponse(
                 accessToken,
                 refreshToken,
+                user.getEmail(),
+                user.getUsername(),
+                toRoleResponse(user.getRoles())
+        );
+    }
+
+    public AuthResponseMe toAuthResponseMe(User user){
+
+        return new AuthResponseMe(
                 user.getUsername(),
                 user.getEmail(),
                 toRoleResponse(user.getRoles())
