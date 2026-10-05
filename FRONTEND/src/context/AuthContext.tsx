@@ -1,4 +1,4 @@
-import { createContext, useContext,useEffect, useState } from "react";
+import React, { createContext, useContext,useEffect, useState } from "react";
 import type { AuthResponse, LoginRequest, RegisterRequest, User } from "../types/auth";
 import { api } from "../api/axios";
 
@@ -7,13 +7,24 @@ import { api } from "../api/axios";
 interface AuthContextType{
     user:User|null;
     loading:boolean;
+    isLoading:boolean;
+    isAuthenticated:boolean;
     register:(data:RegisterRequest) => Promise<void>;
     login:(data:LoginRequest) => Promise<void>;
     logout:() => void;
 }
 
 
-const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = () => {
+
+    const context = useContext(AuthContext);
+    if(!context){
+        throw new Error("useAuth must be used within an AuthProvider");
+    }
+    return context;
+}
 
 export const AuthProvider: React.FC<{children:React.ReactNode}> = ({children}) => {
     const [user, setUser] = useState<User | null>(null);
@@ -31,6 +42,7 @@ export const AuthProvider: React.FC<{children:React.ReactNode}> = ({children}) =
                 catch{
                     localStorage.removeItem('accessToken');
                     localStorage.removeItem('refreshToken');
+                    setUser(null);
                 }
             }
             setLoading(false);
@@ -51,7 +63,7 @@ export const AuthProvider: React.FC<{children:React.ReactNode}> = ({children}) =
 
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
-        setUser({email, username, roles});
+        setUser({email, username, roles} as User);
     };
 
 
@@ -67,7 +79,7 @@ export const AuthProvider: React.FC<{children:React.ReactNode}> = ({children}) =
 
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
-        setUser({email, username, roles});
+        setUser({email, username, roles} as User);
     };
 
 
@@ -82,6 +94,8 @@ export const AuthProvider: React.FC<{children:React.ReactNode}> = ({children}) =
         <AuthContext.Provider value={{
             user,
             loading,
+            isLoading: loading,
+            isAuthenticated: !!user,
             login,
             register,
             logout

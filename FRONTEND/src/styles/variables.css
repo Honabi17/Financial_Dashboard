@@ -1,0 +1,26 @@
+:root{
+
+    --color-primary: #6366f1;
+    --color-secondary: #a855f7;
+
+    --color-success: #22c55e;
+    --color-danger: #ef4444;
+    --income-color: var(--color-success);
+    --expense-color: var(--color-danger);
+    
+    --color-bg: #0f172a;
+    --color-card: #1e293b;
+    --color-border: #334155;
+
+    --color-text: #f8fafc;
+    --color-text-secondary: #94a3b8;
+
+    --radius-md: 12px;
+    --radius-lg: 20px;
+
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+
+    --transition: 0.3s ease;
+
+    --sidebar-width: 260px;
+}

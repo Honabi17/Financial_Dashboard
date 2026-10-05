@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# IDE e configurações (todas as subpastas)
+**/*.iml
+**/*.xml
+**/.idea/
