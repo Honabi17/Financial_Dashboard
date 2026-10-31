@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -80,13 +81,28 @@ public class GlobalHandlerException {
             BadRequestException exception,
             HttpServletRequest request
     ){
-            ErrorResponse error =new ErrorResponse(
+            ErrorResponse error = new ErrorResponse(
                     HttpStatus.BAD_REQUEST.value(),
                     exception.getMessage(),
                     request.getRequestURI()
             );
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentials(
+            BadCredentialsException exception,
+            HttpServletRequest request
+    ){
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                "Invalid email or password",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 }
 
