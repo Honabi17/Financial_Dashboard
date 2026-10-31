@@ -6,7 +6,6 @@ import { api } from "../api/axios";
 
 interface AuthContextType{
     user:User|null;
-    loading:boolean;
     isLoading:boolean;
     isAuthenticated:boolean;
     register:(data:RegisterRequest) => Promise<void>;
@@ -93,7 +92,6 @@ export const AuthProvider: React.FC<{children:React.ReactNode}> = ({children}) =
     return(
         <AuthContext.Provider value={{
             user,
-            loading,
             isLoading: loading,
             isAuthenticated: !!user,
             login,
