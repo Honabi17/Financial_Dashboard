@@ -9,7 +9,6 @@ import com.luis.financial_backend.modules.auth.mapper.AuthMapper;
 import com.luis.financial_backend.modules.auth.repository.RoleRepository;
 import com.luis.financial_backend.modules.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
