@@ -83,14 +83,16 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public AuthResponse login(LoginRequest request) {
 
+        String email = request.email().trim().toLowerCase();
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.email(),
+                        email,
                         request.password()
                 )
         );
 
-        User user = getUserByEmail(request.email());
+        User user = getUserByEmail(email);
 
         String accessToken = jwtService.generateToken(user.getEmail());
         String refreshToken = jwtService.generateRefreshToken(user.getEmail());
