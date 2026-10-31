@@ -1,6 +1,10 @@
+export interface Permission{
+    name:string;
+}
+
 export interface Role{
     name:string;
-    permissions:string[];
+    permissions:Permission[];
 }
 
 export interface User{
