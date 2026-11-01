@@ -28,4 +28,6 @@
     --transition: 0.3s ease;
 
     --sidebar-width: 260px;
+
+    --content-width: 1280px;
 }

@@ -30,14 +30,13 @@ export const LandingPage: React.FC = () => {
 
                 <div className="hero-content">
 
-                    <span className="hero-badge">
+                    <h1 className="hero-title">
                         Personal Finance Management
-                    </span>
-
-                    <h1>
-                        Take Control of Your 
-                        <span> Finances</span>
                     </h1>
+
+                    <h2 className="hero-subtitle">
+                        Take Control of Your Finances
+                    </h2>
 
                     <p className="text-secondary">
                         Track income, manage expenses, monitor your balance
