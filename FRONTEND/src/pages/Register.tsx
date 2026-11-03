@@ -2,6 +2,7 @@ import type React from "react";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import "./auth.css";
 
 
 
@@ -51,92 +52,109 @@ export const Register: React.FC = () => {
     };
 
     return(
-       <div>
-            <h2>Register</h2>
-            {error && <p>{error}</p>}
+       <div className="auth-page">
+            <div className="auth-card">
 
-            <form
-                onSubmit={handleSubmit}
-            >
+                <h2>Register</h2>
+                <p className="auth-subtitle">
+                    Create your account to get started.
+                </p>
 
-                <div>    
-                    <label 
-                        htmlFor="username"
-                    >
-                        username
-                    </label>
-                    <input
-                        id="username"
-                        type="text"
-                        value={username}
-                        onChange={
-                            (e) => setUsername(e.target.value)
-                        }
-                        required
-                    />
-                </div>
+                {error && 
+                    <p className="auth-error">
+                        {error}
+                    </p>
+                }
+
+                <form className="auth-form"
+                    onSubmit={handleSubmit}
+                >
+
+                    <div className="auth-field">    
+                        <label 
+                            htmlFor="username"
+                        >
+                            Username
+                        </label>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={
+                                (e) => setUsername(e.target.value)
+                            }
+                            autoComplete="username"
+                            required
+                        />
+                    </div>
 
 
-                <div>        
-                    <label
-                        htmlFor="email"
-                    >
-                        email
-                    </label>
-                    <input 
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={
-                            (e) => setEmail(e.target.value)
-                        }
-                        required
-                    />
-                </div>
+                    <div className="auth-field">        
+                        <label
+                            htmlFor="email"
+                        >
+                            Email
+                        </label>
+                        <input 
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={
+                                (e) => setEmail(e.target.value)
+                            }
+                            autoComplete="email"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label
-                        htmlFor="password"
-                    >
-                        password
-                    </label>
-                    <input 
-                        id="password"
-                        type="password"
-                        value={password}
-                        onChange={
-                            (e) => setPassword(e.target.value)
-                        }
-                        required
-                    />
-                </div>
+                    <div className="auth-field">
+                        <label
+                            htmlFor="password"
+                        >
+                            Password
+                        </label>
+                        <input 
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={
+                                (e) => setPassword(e.target.value)
+                            }
+                            minLength={6}
+                            autoComplete="new-password"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <button
-                        type="submit"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Creating...' : 'Create'}
-                    </button>
+                    <div className="auth-actions">
+                        <button
+                            type="submit"
+                            className="btn-primary"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Creating...' : 'Create'}
+                        </button>
 
-                    <button
-                        type="button"
-                        disabled={isSubmitting}
-                        onClick={
-                            () => navigate('/')
-                        }
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </form>
-            
-            <p>
-                Already have an account? 
-                <Link to="/login">
-                        Login here
-                </Link>
-            </p>
+                        <button
+                            type="button"
+                            className="btn-secondary"
+                            disabled={isSubmitting}
+                            onClick={
+                                () => navigate('/')
+                            }
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+                
+                <p className="auth-footer">
+                    Already have an account? 
+                    <Link to="/login">
+                            Login here
+                    </Link>
+                </p>
+            </div>
        </div>
     );
 };
