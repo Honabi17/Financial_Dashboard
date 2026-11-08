@@ -49,6 +49,13 @@ export const Login: React.FC = () =>{
 
     return(
         <div className="auth-page">
+
+            <div className="auth-bg" aria-hidden="true">
+                <span className="orb orb-1"></span>
+                <span className="orb orb-2"></span>
+                <span className="orb orb-3"></span>
+            </div>
+
             <div className="auth-card">
 
                 <h2>Login</h2>
