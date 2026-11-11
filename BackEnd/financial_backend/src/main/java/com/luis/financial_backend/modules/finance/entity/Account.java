@@ -2,6 +2,7 @@ package com.luis.financial_backend.modules.finance.entity;
 
 import com.luis.financial_backend.common.BaseEntity;
 import com.luis.financial_backend.modules.auth.entity.User;
+import com.luis.financial_backend.modules.finance.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
 
